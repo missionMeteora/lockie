@@ -8,7 +8,7 @@ import (
 
 var i64b = is64bit()
 
-// NewLockie returns a pointer to a new instance of Lockie
+// NewLockie returns a Lockie interface
 func NewLockie() Lockie {
 	if !i64b {
 		return &Lockie32{}
@@ -21,6 +21,11 @@ func NewLockie() Lockie {
 type Lockie interface {
 	Lock()
 	Unlock()
+}
+
+// NewLockie64 returns a pointer to a new instance of Lockie64
+func NewLockie64() *Lockie64 {
+	return &Lockie64{}
 }
 
 // Lockie64 is the 64-bit optimized locking mechanism
@@ -44,6 +49,11 @@ func (l *Lockie64) Lock() {
 func (l *Lockie64) Unlock() {
 	// Swaps the value of l.lock to 0
 	atomic.StoreInt64(&l.lock, 0)
+}
+
+// NewLockie32 returns a pointer to a new instance of Lockie32
+func NewLockie32() *Lockie32 {
+	return &Lockie32{}
 }
 
 // Lockie32 is the 32-bit optimized locking mechanism
