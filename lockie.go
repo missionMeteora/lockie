@@ -6,14 +6,17 @@ import (
 	"unsafe"
 )
 
+// i64b is a boolean value which represents whether or not the current system is 64-bit
 var i64b = is64bit()
 
 // NewLockie returns a Lockie interface
 func NewLockie() Lockie {
+	// If we are not on 64-bit, return Lockie32
 	if !i64b {
 		return &Lockie32{}
 	}
 
+	// Else, return Lockie64
 	return &Lockie64{}
 }
 
@@ -79,7 +82,10 @@ func (l *Lockie32) Unlock() {
 	atomic.StoreInt32(&l.lock, 0)
 }
 
+// Checks to see if the current system is 64-bit
 func is64bit() bool {
 	var i int
+	// If size of int is 8 bytes, we are on a 64-bit system
+	// Otherwise, we are on a 32-bit system (4 byte int length)
 	return unsafe.Sizeof(&i) == 8
 }
