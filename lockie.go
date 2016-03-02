@@ -27,24 +27,3 @@ func (l *Lockie) Lock() {
 func (l *Lockie) Unlock() {
 	atomic.StoreInt64(&l.lock, 0)
 }
-
-// NewRWLockie returns a pointer to a new instance of RWLockie
-func NewRWLockie() *RWLockie {
-	return &RWLockie{}
-}
-
-// RWLockie is no different than Lockie
-// This is used to match a standard RW mutex interface
-type RWLockie struct {
-	Lockie
-}
-
-// RLock acquires a read-lock
-func (l *RWLockie) RLock() {
-	l.Lock()
-}
-
-// RUnlock releases a read-lock
-func (l *RWLockie) RUnlock() {
-	l.Unlock()
-}
