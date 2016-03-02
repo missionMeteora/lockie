@@ -1,6 +1,4 @@
 # lockie [![GoDoc](https://godoc.org/github.com/missionMeteora/lockie?status.svg)](https://godoc.org/github.com/missionMeteora/lockie) ![Status](https://img.shields.io/badge/status-beta-yellow.svg)
-
-# lockie
 A dead simple locking mechanism
 
 ## Usage
