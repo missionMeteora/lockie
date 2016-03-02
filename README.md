@@ -8,7 +8,7 @@ package main
 import "fmt"
 
 type DB struct {
-	mux *Lockie
+	mux Lockie
 	m   map[string]string
 }
 
