@@ -1,6 +1,41 @@
 # lockie
 A dead simple locking mechanism
 
+## Usage
+```go
+package main 
+
+import "fmt"
+
+type DB struct {
+	mux *Lockie
+	m   map[string]string
+}
+
+func (db *DB) Get(k string) (v int) {
+	db.mux.Lock()
+	v = t.m[k]
+	db.mux.Unlock()
+	return v
+}
+
+func (db *DB) Put(k string, v int) {
+	db.mux.Lock()
+	db.m[k] = v
+	db.mux.Unlock()
+}
+
+func main(){
+	db := DB{
+		mux: NewLockie(),
+		m:   make(map[string]string),
+	}
+	
+	db.Put("name", "John Doe")
+	fmt.Println(db.Get("name"))
+}
+```
+
 ## Benchmarks
 ```markdown
 # Command
